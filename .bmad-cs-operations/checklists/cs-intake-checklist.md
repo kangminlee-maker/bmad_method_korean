@@ -30,4 +30,5 @@
 ## Notes
 - 정책 참조: `docs/cs-expansion/CS-Operations-Policies-and-Processes.md`
 - 보안: 마스킹 누락 의심 시 접수 보류 및 보안 담당 통보
+- handoff 후보 표시 시: 후속 단계에서 사람 Sign-off 필요(assess-handoff-eligibility)
 

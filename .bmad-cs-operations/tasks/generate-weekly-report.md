@@ -31,6 +31,9 @@
 - CSAT: 평균/분포/부정 코멘트 Top N
 - Handoff/Collab: 리드타임/지연율/재작업률
 - Promise Breaches: 고객 약속 미이행 건수
+ - Handoff Signed Rate: handoff 결정 중 사람 Sign-off 완료 비율(목표 100%)
+ - Handoff Without Signoff: 서명 없이 이관된 건수(목표 0)
+ - Time to Signoff: handoff 평가 시작→서명까지 평균 소요
 
 ## 단계별 지침
 1) 데이터 수집/정규화: 기간 필터(월~일), 누락/오류 보정

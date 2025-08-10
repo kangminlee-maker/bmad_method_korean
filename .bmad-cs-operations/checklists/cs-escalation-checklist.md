@@ -26,4 +26,5 @@
 ## Notes
 - SLA 재설정: L1은 잔여시간 50%로 단축(최소 30m), L2는 워룸 공지 일정 준수
 - 고객 업데이트 빈도: L1 60분 내 1회, L2 30분 내 1회 후 공지와 동기화
+- 규제/법무 리스크로 handoff 전환 시: `assess-handoff-eligibility` 실행 및 사람 Sign-off 후 공지 가능
 
