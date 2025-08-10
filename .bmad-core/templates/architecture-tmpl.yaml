@@ -1,0 +1,150 @@
+template:
+  id: architecture-template-v2
+  name: 시스템 아키텍처 문서
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/architecture.md
+    title: "{{project_name}} 시스템 아키텍처"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: overview
+    title: 아키텍처 개요
+    instruction: |
+      PRD를 검토하고 고수준 시스템 개요를 작성합니다. 단계:
+      
+      1. PRD의 목표와 요구사항 요약
+      2. 주요 아키텍처 결정과 근거 설명
+      3. 시스템 경계와 범위 정의
+      4. 주요 제약사항과 가정 문서화
+    sections:
+      - id: executive-summary
+        title: 실행 요약
+        instruction: 비기술적 이해관계자를 위한 1-2 단락 요약
+      - id: key-decisions
+        title: 주요 아키텍처 결정
+        type: bullet-list
+        instruction: 근거와 함께 주요 기술 선택 나열
+      - id: constraints
+        title: 제약사항 및 가정
+        type: bullet-list
+        instruction: PRD에서 기술적 제약사항과 우리가 만든 가정 나열
+
+  - id: system-design
+    title: 시스템 설계
+    instruction: |
+      핵심 시스템 아키텍처를 설계합니다. 계층, 서비스, 주요 구성 요소에 집중하십시오.
+      구현 세부사항보다는 구조와 관계에 중점을 둡니다.
+    elicit: true
+    sections:
+      - id: architecture-style
+        title: 아키텍처 스타일
+        instruction: 선택한 아키텍처 패턴 설명 (예: 계층형, 마이크로서비스, 이벤트 기반)
+      - id: component-overview
+        title: 구성 요소 개요
+        instruction: |
+          주요 시스템 구성 요소와 그들의 책임을 설명합니다.
+          텍스트 다이어그램이나 구조화된 설명을 사용하십시오.
+      - id: data-flow
+        title: 데이터 흐름
+        instruction: 시스템을 통한 데이터 이동 방법 설명
+
+  - id: technical-stack
+    title: 기술 스택
+    instruction: |
+      각 계층에 대한 구체적인 기술 선택을 문서화합니다.
+      PRD의 기술적 가정을 참조하고 필요에 따라 확장합니다.
+    elicit: true
+    sections:
+      - id: frontend
+        title: 프런트엔드
+        condition: 시스템에 UI가 있음
+        instruction: UI 프레임워크, 상태 관리, 빌드 도구, 스타일링 접근법
+      - id: backend
+        title: 백엔드
+        instruction: 서버 프레임워크, API 설계, 비즈니스 로직 구조
+      - id: database
+        title: 데이터베이스
+        instruction: 데이터베이스 선택, 스키마 접근법, 데이터 모델링 전략
+      - id: infrastructure
+        title: 인프라
+        instruction: 호스팅, 컨테이너화, 오케스트레이션, CI/CD
+
+  - id: integration
+    title: 통합 및 API
+    instruction: |
+      시스템이 외부 서비스 및 내부 구성 요소와 어떻게 통합되는지 설명합니다.
+    sections:
+      - id: api-design
+        title: API 설계
+        instruction: API 스타일 (REST, GraphQL, gRPC), 버전 관리, 문서화 접근법
+      - id: external-services
+        title: 외부 서비스
+        instruction: 타사 서비스, API, 라이브러리와 통합 전략
+      - id: internal-communication
+        title: 내부 통신
+        instruction: 서비스 간 통신, 메시징, 이벤트 처리
+
+  - id: security
+    title: 보안 아키텍처
+    instruction: |
+      보안 고려사항과 구현 전략을 다룹니다.
+    elicit: true
+    sections:
+      - id: authentication
+        title: 인증 및 권한 부여
+        instruction: 사용자 인증, 세션 관리, 권한 모델
+      - id: data-protection
+        title: 데이터 보호
+        instruction: 암호화, 민감한 데이터 처리, 규정 준수
+      - id: security-measures
+        title: 보안 조치
+        instruction: 추가 보안 고려사항, 모범 사례, 위협 완화
+
+  - id: performance
+    title: 성능 및 확장성
+    instruction: |
+      시스템이 성능 요구사항을 충족하고 확장하는 방법을 설명합니다.
+    sections:
+      - id: performance-targets
+        title: 성능 목표
+        instruction: PRD의 구체적인 성능 요구사항과 충족 방법
+      - id: scaling-strategy
+        title: 확장 전략
+        instruction: 수평/수직 확장, 로드 밸런싱, 캐싱
+      - id: optimization
+        title: 최적화
+        instruction: 성능 최적화 기법과 모니터링
+
+  - id: deployment
+    title: 배포 및 운영
+    instruction: |
+      시스템이 배포되고 운영되는 방법을 설명합니다.
+    sections:
+      - id: deployment-architecture
+        title: 배포 아키텍처
+        instruction: 환경, 배포 파이프라인, 릴리스 전략
+      - id: monitoring
+        title: 모니터링 및 로깅
+        instruction: 관찰 가능성, 로깅 전략, 경고, 대시보드
+      - id: maintenance
+        title: 유지보수 및 지원
+        instruction: 업데이트 전략, 백업, 재해 복구
+
+  - id: checklist-results
+    title: 체크리스트 결과
+    instruction: architect-checklist를 실행하고 결과를 문서화합니다.
+
+  - id: appendices
+    title: 부록
+    sections:
+      - id: glossary
+        title: 용어집
+        instruction: 기술 용어와 약어 정의
+      - id: references
+        title: 참조
+        instruction: 관련 문서, 표준, 추가 읽기 자료 링크

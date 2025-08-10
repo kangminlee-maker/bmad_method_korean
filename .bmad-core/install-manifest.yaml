@@ -1,0 +1,170 @@
+manifest:
+  id: bmad-method-korean
+  name: BMAD 메소드 한글 버전
+  version: 1.0.0
+  baseVersion: 4.35.3
+  description: AI 기반 애자일 개발 방법론의 완전한 한글화 버전
+
+metadata:
+  language: ko
+  translationDate: 2024-12-19
+  compatibility: 
+    - bmad-method: ">=4.0.0"
+    - node: ">=14.0.0"
+  
+structure:
+  core:
+    agents:
+      - pm.md
+      - architect.md
+      - dev.md
+      - qa.md
+      - sm.md
+      - po.md
+      - ux-expert.md
+      - analyst.md
+      - bmad-master.md
+      - bmad-orchestrator.md
+    
+    tasks:
+      - create-doc.md
+      - create-next-story.md
+      - shard-doc.md
+      - execute-checklist.md
+      - review-story.md
+      - validate-next-story.md
+      - correct-course.md
+      - brownfield-create-epic.md
+      - brownfield-create-story.md
+      - create-brownfield-story.md
+      - create-deep-research-prompt.md
+      - document-project.md
+      - facilitate-brainstorming-session.md
+      - generate-ai-frontend-prompt.md
+      - index-docs.md
+      - kb-mode-interaction.md
+      - advanced-elicitation.md
+    
+    templates:
+      - prd-tmpl.yaml
+      - architecture-tmpl.yaml
+      - story-tmpl.yaml
+      - front-end-architecture-tmpl.yaml
+      - fullstack-architecture-tmpl.yaml
+      - brownfield-prd-tmpl.yaml
+      - brownfield-architecture-tmpl.yaml
+      - front-end-spec-tmpl.yaml
+      - project-brief-tmpl.yaml
+      - market-research-tmpl.yaml
+      - competitor-analysis-tmpl.yaml
+      - brainstorming-output-tmpl.yaml
+    
+    checklists:
+      - pm-checklist.md
+      - architect-checklist.md
+      - po-master-checklist.md
+      - story-dod-checklist.md
+      - story-draft-checklist.md
+      - change-checklist.md
+    
+    workflows:
+      - greenfield-fullstack.yaml
+      - greenfield-service.yaml
+      - greenfield-ui.yaml
+      - brownfield-fullstack.yaml
+      - brownfield-service.yaml
+      - brownfield-ui.yaml
+    
+    data:
+      - bmad-kb.md
+      - technical-preferences.md
+      - elicitation-methods.md
+      - brainstorming-techniques.md
+    
+    utils:
+      - bmad-doc-template.md
+      - workflow-management.md
+    
+    guides:
+      - 사용자가이드.md
+      - 브라운필드에서작업하기.md
+      - 향상된IDE개발워크플로우.md
+
+  webBundles:
+    agents:
+      - pm.txt
+      - architect.txt
+      - dev.txt
+      - qa.txt
+      - sm.txt
+      - po.txt
+      - ux-expert.txt
+      - analyst.txt
+      - bmad-master.txt
+      - bmad-orchestrator.txt
+    
+    teams:
+      - team-fullstack.txt
+      - team-ide-minimal.txt
+      - team-no-ui.txt
+      - team-all.txt
+    
+    expansionPacks:
+      - bmad-2d-phaser-game-dev
+      - bmad-2d-unity-game-dev
+      - bmad-infrastructure-devops
+      - bmad-cs-operations
+
+installation:
+  steps:
+    - id: check-prerequisites
+      name: 전제 조건 확인
+      checks:
+        - node-version
+        - npm-version
+        - workspace-permissions
+    
+    - id: create-structure
+      name: 디렉토리 구조 생성
+      creates:
+        - .bmad-core/
+        - docs/
+        - src/
+        - tests/
+    
+    - id: copy-files
+      name: 파일 복사
+      source: package-root
+      destination: project-root
+    
+    - id: configure
+      name: 프로젝트 설정
+      prompts:
+        - docs-folder
+        - preferred-stack
+        - team-size
+    
+    - id: initialize
+      name: 초기화
+      actions:
+        - create-gitignore
+        - create-welcome-doc
+        - setup-vscode-settings
+
+postInstall:
+  message: |
+    🎉 BMAD 메소드 한글 버전이 성공적으로 설치되었습니다!
+    
+    시작하기:
+    1. @제품관리자 *help 로 시작하세요
+    2. docs/BMAD-시작하기.md 를 참조하세요
+    3. .bmad-core/사용자가이드.md 에서 상세 정보를 확인하세요
+    
+    행복한 개발 되세요! 🚀
+
+features:
+  - 완전한 한글화
+  - 모든 원본 기능 포함
+  - IDE 통합 지원
+  - 웹 플랫폼 호환
+  - 확장팩 포함

@@ -1,0 +1,13 @@
+bundle:
+  name: UI 없는 팀
+  icon: 🔧
+  description: UX 또는 UI 계획이 없는 팀.
+agents:
+  - bmad-orchestrator
+  - analyst
+  - pm
+  - architect
+  - po
+workflows:
+  - greenfield-service.yaml
+  - brownfield-service.yaml

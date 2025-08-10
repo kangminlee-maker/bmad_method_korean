@@ -1,0 +1,72 @@
+{
+  "name": "bmad-method-korean",
+  "version": "1.0.1",
+  "description": "BMAD 메소드 한글 버전 - AI 기반 애자일 개발 및 계획 방법론의 완전한 한글화 버전",
+  "main": "index.js",
+  "bin": {
+    "bmad-korean": "bin/bmad-korean.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/install.js",
+    "test": "jest",
+    "build": "node scripts/build.js",
+    "translate": "node scripts/translate-all.js"
+  },
+  "keywords": [
+    "bmad",
+    "애자일",
+    "AI",
+    "개발방법론",
+    "한글",
+    "프로젝트관리",
+    "소프트웨어개발",
+    "자동화",
+    "에이전트",
+    "워크플로우"
+  ],
+  "author": "BMAD Korean Translation Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmad-korean/bmad-method-korean.git"
+  },
+  "homepage": "https://github.com/bmad-korean/bmad-method-korean#readme",
+  "bugs": {
+    "url": "https://github.com/bmad-korean/bmad-method-korean/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.0.0",
+    "inquirer": "^8.2.5",
+    "ora": "^5.4.1",
+    "yaml": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "prettier": "^2.8.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bmadConfig": {
+    "language": "ko",
+    "version": "1.0.0",
+    "baseVersion": "4.35.3",
+    "translationInfo": {
+      "originalLanguage": "en",
+      "targetLanguage": "ko",
+      "translationDate": "2024-12-19",
+      "translationTeam": "BMAD Korean Community",
+      "completeness": "100%"
+    },
+    "features": {
+      "agents": 17,
+      "tasks": 17,
+      "templates": 12,
+      "checklists": 6,
+      "workflows": 6,
+      "expansionPacks": 3
+    }
+  }
+}

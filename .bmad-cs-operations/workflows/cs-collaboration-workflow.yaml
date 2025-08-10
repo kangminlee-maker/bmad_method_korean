@@ -1,0 +1,58 @@
+workflow:
+  id: cs-collaboration-workflow
+  name: 타 부서 협업 처리
+  description: 요청 → 추적 → 완료 검증 → 통합 답변 → 품질 리뷰(사람 Sign-off) → 최종 답변
+  type: cs
+
+  policy_notes:
+    - review-response(사람 Sign-off) 필수
+    - finalize-response에서 pre-send preview 및 content_hash 대조
+
+  decision_points:
+    - id: external_progress
+      description: 외부 작업 진행 상태에 따른 분기
+      branches:
+        continue_tracking: 업데이트 준수 → 추적 유지
+        delayed: ≥20% 지연/주기 미준수 → 경보/에스컬레이션
+        complete: 완료 신호 수신 → 검증 단계로 이동
+    - id: allow_send
+      description: 고객 발송 허용 여부 판단
+      condition: pre-send preview의 content_hash == review-response Sign-off content_hash
+      branches:
+        allow_send: 발송 가능
+        block_send: 프리뷰 재생성·재승인 필요
+
+  guards:
+    - name: required_metadata
+      applies_to: [delegate-to-department, track-external-work, verify-completion, integrate-responses, review-response, finalize-response]
+      checks: [case_id, updated_at, owner]
+    - name: escalation_on_risk
+      applies_to: [track-external-work, verify-completion]
+      checks: [regulatory_or_legal_risk → escalate-L1]
+    - name: handoff_signoff_required_if_switched
+      applies_to: [assess-handoff-eligibility]
+      checks: [reviewer, signed_at]
+
+  notes:
+    - 외부 업데이트 주기 미준수 2회 누적 시 L1, 3회 시 L2 검토
+
+  sequence:
+    - agent: cs-intake
+      action: classify-and-route
+    - agent: cs-collaboration-coordinator
+      action: delegate-to-department
+    - agent: cs-collaboration-coordinator
+      action: track-external-work
+      repeats: until_completion
+    - agent: cs-collaboration-coordinator
+      action: verify-completion
+    - agent: cs-collaboration-coordinator
+      action: integrate-responses
+    - agent: cs-quality
+      action: review-response
+      notes: 사람 Sign-off 필수
+    - agent: cs-processor
+      action: finalize-response
+      notes: pre-send preview 생성 및 content_hash 저장/대조
+    - agent: cs-intake
+      action: deliver-final-response

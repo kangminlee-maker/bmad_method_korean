@@ -1,0 +1,127 @@
+# BMAD 한글 버전 핵심 설정
+# 이 파일은 BMAD 시스템의 핵심 동작을 제어합니다
+
+version: 1.0.0
+baseVersion: 4.35.3
+language: ko
+
+# 프로젝트 구조 설정
+structure:
+  docsFolder: docs
+  storiesFolder: docs/stories
+  architectureFolder: docs/architecture
+  testsFolder: tests
+  srcFolder: src
+
+# 개발자 에이전트가 항상 로드해야 하는 파일들
+# 이 파일들은 개발 중 항상 컨텍스트에 포함됩니다
+devLoadAlwaysFiles:
+  - docs/architecture/coding-standards.md
+  - docs/architecture/tech-stack.md
+  - docs/architecture/project-structure.md
+  - .bmad-core/data/technical-preferences.md
+
+# 에이전트 동작 설정
+agents:
+  defaultLanguage: ko
+  interactionMode: interactive  # interactive | yolo
+  elicitationRequired: true
+  numberOptionsFormat: true
+
+# 워크플로우 설정
+workflows:
+  defaultType: greenfield  # greenfield | brownfield
+  defaultStack: fullstack  # fullstack | service | ui
+  autoValidation: true
+  autoTesting: true
+
+# 템플릿 설정
+templates:
+  defaultFormat: markdown
+  autoSave: true
+  versionControl: true
+
+# 체크리스트 설정
+checklists:
+  autoRun: false
+  strictMode: true
+  reportFormat: detailed  # detailed | summary
+
+# 파일 명명 규칙
+fileNaming:
+  agents: kebab-case
+  tasks: kebab-case
+  templates: kebab-case-tmpl
+  checklists: kebab-case-checklist
+  
+# 한글화 설정
+localization:
+  dateFormat: YYYY년 MM월 DD일
+  numberFormat: ko-KR
+  currency: KRW
+  timezone: Asia/Seoul
+
+# 통합 설정
+integrations:
+  git:
+    enabled: true
+    autoCommit: false
+    commitMessagePrefix: "[BMAD]"
+  
+  ide:
+    cursor:
+      enabled: true
+      commandPrefix: "@"
+    
+    windsurf:
+      enabled: true
+      commandPrefix: "@"
+    
+    vscode:
+      enabled: true
+      commandPrefix: "bmad:"
+
+# 로깅 설정
+logging:
+  level: info  # debug | info | warn | error
+  format: json
+  destination: .bmad-core/logs
+  
+# 캐싱 설정
+cache:
+  enabled: true
+  ttl: 3600  # seconds
+  location: .bmad-core/cache
+
+# 보안 설정
+security:
+  sanitizeInput: true
+  validateTemplates: true
+  restrictedPaths:
+    - /etc
+    - /usr
+    - /var
+    - ~/.ssh
+
+# 성능 설정
+performance:
+  maxContextSize: 100000  # characters
+  maxFileSize: 10485760   # 10MB in bytes
+  parallelTasks: true
+  lazyLoading: true
+
+# 커스터마이징 후크
+hooks:
+  beforeAgentActivation: []
+  afterAgentActivation: []
+  beforeTaskExecution: []
+  afterTaskExecution: []
+  beforeDocumentSave: []
+  afterDocumentSave: []
+
+# 디버그 설정
+debug:
+  enabled: false
+  verboseLogging: false
+  showInternalCommands: false
+  traceExecution: false

@@ -1,0 +1,52 @@
+# template meta (common)
+# - required metadata: case_id, updated_at(ISO/timezone), author, owner
+# - guards: customer identifiers masked; category is product-bug or feature-request
+
+template:
+  id: product-feedback-brief
+  name: 제품 피드백 브리프
+  output:
+    format: markdown
+    filename: cases/{{case_id}}-product-brief.md
+sections:
+  - id: summary
+    title: 요약
+    template: |
+      - 유형: {{product_bug|feature_request}}
+      - 고객/세그먼트: {{customer_segment}}
+      - 임팩트/빈도: {{impact}} / {{frequency}}
+  - id: context
+    title: 고객 컨텍스트
+    template: |
+      {{customer_context}}
+  - id: problem
+    title: 문제/요구 사항
+    template: |
+      {{problem_statement}}
+  - id: reproduction
+    title: 재현/근거(버그일 경우)
+    template: |
+      {{repro_steps}}
+  - id: impact
+    title: 임팩트/규제/리스크
+    template: |
+      {{impact_risk}}
+  - id: evidence
+    title: 증빙 링크
+    type: bullet-list
+    template: "- {{link}}"
+  - id: suggested_ac
+    title: 제안된 수용 기준(초안)
+    type: bullet-list
+    template: "- {{ac}}"
+  - id: references
+    title: 참고 자료
+    type: bullet-list
+    template: "- {{ref}}"
+  - id: notes
+    title: 노트(제품 경로)
+    type: bullet-list
+    template: |
+      - 고객 식별자 마스킹 필수
+      - category: product-bug | feature-request 가드 충족
+      - PM 1차 판단 SLA: 48h 권장 — 고객 안내 타임라인 반영

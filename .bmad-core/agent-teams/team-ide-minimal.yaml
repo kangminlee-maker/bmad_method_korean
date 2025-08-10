@@ -1,0 +1,10 @@
+bundle:
+  name: IDE 최소 팀
+  icon: ⚡
+  description: IDE PO SM 개발 QA 사이클을 위한 최소한의 구성.
+agents:
+  - po
+  - sm
+  - dev
+  - qa
+workflows: null
