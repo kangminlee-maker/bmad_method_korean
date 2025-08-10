@@ -201,18 +201,13 @@ MIT License - 자유롭게 사용, 수정, 배포할 수 있습니다.
 - 🌐 **원본 BMAD Method**: [github.com/bmadcode/bmad-method](https://github.com/bmadcode/bmad-method)
 - 💬 **Discord 커뮤니티**: [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
 - 📺 **YouTube 채널**: [youtube.com/@BMadCode](https://www.youtube.com/@BMadCode)
-- 📧 **이메일**: bmad.korean@gmail.com
 
 ## 🙏 감사의 말
 
 - 원본 BMAD Method 개발팀
-- 한글 번역에 참여한 모든 기여자들
-- 피드백을 주신 한국 개발자 커뮤니티
 
 ---
 
 <div align="center">
   <strong>🚀 BMAD 메소드 한글 버전으로 더 효율적이고 체계적인 개발을 시작하세요!</strong>
-  
-  Made with ❤️ by BMAD Korean Community
 </div>
