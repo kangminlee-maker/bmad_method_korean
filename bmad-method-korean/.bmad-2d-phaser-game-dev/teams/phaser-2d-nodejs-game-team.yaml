@@ -1,0 +1,10 @@
+bundle:
+  name: Phaser 2D Node.js 게임 팀
+  icon: 🎮
+  description: Phaser.js를 사용한 2D 게임 개발을 위한 전체 팀.
+agents:
+  - game-designer
+  - game-developer
+  - game-sm
+workflows:
+  - game-dev-workflow

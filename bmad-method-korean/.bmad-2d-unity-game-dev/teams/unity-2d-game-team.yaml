@@ -1,0 +1,11 @@
+bundle:
+  name: Unity 2D 게임 팀
+  icon: 🎮
+  description: Unity를 사용한 2D 게임 개발을 위한 전체 팀.
+agents:
+  - game-architect
+  - game-designer
+  - game-developer
+  - game-sm
+workflows:
+  - unity-game-dev-workflow

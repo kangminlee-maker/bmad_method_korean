@@ -1,0 +1,252 @@
+template:
+  id: market-research-template-v2
+  name: 시장 조사 보고서
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/market-research.md
+    title: "시장 조사 보고서: {{project_product_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  custom_elicitation:
+    title: "시장 조사 유도 작업"
+    options:
+      - "민감도 분석을 포함한 시장 규모 계산 확장"
+      - "특정 고객 세그먼트에 대한 심층 분석"
+      - "신흥 시장 트렌드 상세 분석"
+      - "이 시장을 유사한 시장과 비교"
+      - "시장 가정 스트레스 테스트"
+      - "인접 시장 기회 탐색"
+      - "시장 정의와 경계에 도전"
+      - "전략적 시나리오 생성 (최상/기본/최악의 경우)"
+      - "[X 시장 요인]을 고려했더라면..."
+      - "다음 섹션으로 진행"
+
+sections:
+  - id: executive-summary
+    title: 요약
+    instruction: 주요 발견사항, 시장 기회 평가, 전략적 권장사항에 대한 고수준 개요를 제공합니다. 다른 모든 섹션을 완료한 후 이 섹션을 마지막에 작성하세요.
+
+  - id: research-objectives
+    title: 연구 목표 및 방법론
+    instruction: 이 템플릿은 포괄적인 시장 조사 보고서 작성을 안내합니다. 사용자가 필요로 하는 시장 통찰력과 그 이유를 이해하는 것으로 시작하세요. 연구 목표에 따라 적절한 분석 프레임워크를 사용하여 각 섹션을 체계적으로 작업합니다.
+    sections:
+      - id: objectives
+        title: 연구 목표
+        instruction: |
+          이 시장 조사의 주요 목표 나열:
+          - 이 연구가 어떤 결정에 정보를 제공할 것인가?
+          - 어떤 구체적인 질문에 답해야 하는가?
+          - 이 연구의 성공 기준은 무엇인가?
+      - id: methodology
+        title: 연구 방법론
+        instruction: |
+          연구 접근법 설명:
+          - 사용된 데이터 소스 (1차/2차)
+          - 적용된 분석 프레임워크
+          - 데이터 수집 기간
+          - 제한사항 및 가정
+
+  - id: market-overview
+    title: 시장 개요
+    sections:
+      - id: market-definition
+        title: 시장 정의
+        instruction: |
+          분석 중인 시장 정의:
+          - 제품/서비스 카테고리
+          - 지리적 범위
+          - 포함된 고객 세그먼트
+          - 가치 사슬 위치
+      - id: market-size-growth
+        title: 시장 규모 및 성장
+        instruction: |
+          명확한 가정과 함께 TAM, SAM, SOM 계산을 안내합니다. 하나 이상의 접근법 사용:
+          - 하향식: 산업 데이터에서 시작하여 좁혀가기
+          - 상향식: 고객/단위 경제성에서 구축
+          - 가치 이론: 대안 대비 제공된 가치 기반
+        sections:
+          - id: tam
+            title: 전체 시장 규모 (TAM)
+            instruction: 전체 시장 기회를 계산하고 설명
+          - id: sam
+            title: 서비스 가능 시장 (SAM)
+            instruction: 현실적으로 도달할 수 있는 TAM의 부분 정의
+          - id: som
+            title: 확보 가능 시장 (SOM)
+            instruction: 현실적으로 획득할 수 있는 부분 추정
+      - id: market-trends
+        title: 시장 트렌드 및 동인
+        instruction: PESTEL과 같은 적절한 프레임워크를 사용하여 시장을 형성하는 주요 트렌드 분석
+        sections:
+          - id: key-trends
+            title: 주요 시장 트렌드
+            instruction: |
+              3-5개의 주요 트렌드를 나열하고 설명:
+              - 트렌드 1: 설명 및 영향
+              - 트렌드 2: 설명 및 영향
+              - 등
+          - id: growth-drivers
+            title: 성장 동인
+            instruction: 시장 성장을 이끄는 주요 요인 식별
+          - id: market-inhibitors
+            title: 시장 억제 요인
+            instruction: 시장 성장을 제약하는 요인 식별
+
+  - id: customer-analysis
+    title: 고객 분석
+    sections:
+      - id: segment-profiles
+        title: 목표 세그먼트 프로필
+        instruction: 각 세그먼트에 대해 인구통계학/기업통계학, 심리통계학, 행동, 요구사항, 지불 의향을 포함한 상세 프로필 작성
+        repeatable: true
+        sections:
+          - id: segment
+            title: "세그먼트 {{segment_number}}: {{segment_name}}"
+            template: |
+              - **설명:** {{brief_overview}}
+              - **규모:** {{number_of_customers_market_value}}
+              - **특성:** {{key_demographics_firmographics}}
+              - **요구사항 및 문제점:** {{primary_problems}}
+              - **구매 프로세스:** {{purchasing_decisions}}
+              - **지불 의향:** {{price_sensitivity}}
+      - id: jobs-to-be-done
+        title: 수행해야 할 작업 분석
+        instruction: 고객이 실제로 달성하려는 것이 무엇인지 발견
+        sections:
+          - id: functional-jobs
+            title: 기능적 작업
+            instruction: 고객이 완료해야 하는 실용적인 작업과 목표 나열
+          - id: emotional-jobs
+            title: 감정적 작업
+            instruction: 고객이 추구하는 느낌과 인식 설명
+          - id: social-jobs
+            title: 사회적 작업
+            instruction: 고객이 다른 사람들에게 어떻게 인식되고 싶어하는지 설명
+      - id: customer-journey
+        title: 고객 여정 매핑
+        instruction: 주요 세그먼트의 엔드투엔드 고객 경험 매핑
+        template: |
+          주요 고객 세그먼트의 경우:
+          
+          1. **인지:** {{discovery_process}}
+          2. **고려:** {{evaluation_criteria}}
+          3. **구매:** {{decision_triggers}}
+          4. **온보딩:** {{initial_expectations}}
+          5. **사용:** {{interaction_patterns}}
+          6. **옹호:** {{referral_behaviors}}
+
+  - id: competitive-landscape
+    title: 경쟁 환경
+    sections:
+      - id: market-structure
+        title: 시장 구조
+        instruction: |
+          전반적인 경쟁 환경 설명:
+          - 경쟁사 수
+          - 시장 집중도
+          - 경쟁 강도
+      - id: major-players
+        title: 주요 플레이어 분석
+        instruction: |
+          상위 3-5개 경쟁사에 대해:
+          - 회사명 및 간략한 설명
+          - 시장 점유율 추정
+          - 주요 강점과 약점
+          - 목표 고객 초점
+          - 가격 전략
+      - id: competitive-positioning
+        title: 경쟁 포지셔닝
+        instruction: |
+          경쟁사들의 포지셔닝 분석:
+          - 가치 제안
+          - 차별화 전략
+          - 시장 격차와 기회
+
+  - id: industry-analysis
+    title: 산업 분석
+    sections:
+      - id: porters-five-forces
+        title: 포터의 5가지 힘 평가
+        instruction: 구체적인 증거와 함의로 각 힘을 분석
+        sections:
+          - id: supplier-power
+            title: "공급업체 교섭력: {{power_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: buyer-power
+            title: "구매자 교섭력: {{power_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: competitive-rivalry
+            title: "경쟁 강도: {{intensity_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: threat-new-entry
+            title: "신규 진입 위협: {{threat_level}}"
+            template: "{{analysis_and_implications}}"
+          - id: threat-substitutes
+            title: "대체재 위협: {{threat_level}}"
+            template: "{{analysis_and_implications}}"
+      - id: adoption-lifecycle
+        title: 기술 채택 생명주기 단계
+        instruction: |
+          시장이 채택 곡선의 어디에 있는지 식별:
+          - 현재 단계와 증거
+          - 전략에 대한 함의
+          - 예상 진행 일정
+
+  - id: opportunity-assessment
+    title: 기회 평가
+    sections:
+      - id: market-opportunities
+        title: 시장 기회
+        instruction: 분석을 기반으로 구체적인 기회 식별
+        repeatable: true
+        sections:
+          - id: opportunity
+            title: "기회 {{opportunity_number}}: {{name}}"
+            template: |
+              - **설명:** {{what_is_the_opportunity}}
+              - **규모/잠재력:** {{quantified_potential}}
+              - **요구사항:** {{needed_to_capture}}
+              - **위험:** {{key_challenges}}
+      - id: strategic-recommendations
+        title: 전략적 권장사항
+        sections:
+          - id: go-to-market
+            title: 시장 진출 전략
+            instruction: |
+              시장 진입/확장을 위한 접근법 권장:
+              - 목표 세그먼트 우선순위
+              - 포지셔닝 전략
+              - 채널 전략
+              - 파트너십 기회
+          - id: pricing-strategy
+            title: 가격 전략
+            instruction: |
+              지불 의향 분석과 경쟁 환경을 기반으로:
+              - 권장 가격 모델
+              - 가격대/범위
+              - 가치 지표
+              - 경쟁 포지셔닝
+          - id: risk-mitigation
+            title: 위험 완화
+            instruction: |
+              주요 위험과 완화 전략:
+              - 시장 위험
+              - 경쟁 위험
+              - 실행 위험
+              - 규제/준수 위험
+
+  - id: appendices
+    title: 부록
+    sections:
+      - id: data-sources
+        title: A. 데이터 소스
+        instruction: 연구에 사용된 모든 소스 나열
+      - id: calculations
+        title: B. 상세 계산
+        instruction: 복잡한 계산이나 모델 포함
+      - id: additional-analysis
+        title: C. 추가 분석
+        instruction: 본문에 포함되지 않은 보충 분석

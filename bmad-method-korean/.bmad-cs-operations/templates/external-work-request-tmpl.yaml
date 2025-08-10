@@ -1,0 +1,38 @@
+# template meta (common)
+# - required metadata: case_id, updated_at(ISO/timezone), author, owner
+# - guards: deliverables must be dual-noted (checkbox + evidence), update cadence agreed
+
+template:
+  id: external-work-request
+  name: 타 부서 작업 요청서
+  output:
+    format: markdown
+    filename: cases/{{case_id}}-delegation-request.md
+sections:
+  - id: purpose
+    title: 목적/배경
+    template: |
+      {{purpose}}
+  - id: scope
+    title: 요청 범위/결과물(이중 표기)
+    template: |
+      - [ ] {{deliverable_1}} — evidence: {{evidence_1}}
+      - [ ] {{deliverable_2}} — evidence: {{evidence_2}}
+  - id: timeline
+    title: 마일스톤/기한
+    template: |
+      - milestones: {{milestones}}
+      - due: {{due_at}}
+  - id: comms
+    title: 연락/업데이트/에스컬레이션
+    template: |
+      - channel: {{channel}} — cadence: {{cadence}}
+      - escalation: {{path}}
+  - id: notes
+    title: 노트(운영 규약)
+    type: bullet-list
+    template: |
+      - 결과물은 체크박스 + 증빙(파일/티켓/서명) 이중 표기
+      - 업데이트 주기 미준수 2회 누적 시 L1, 3회 시 L2 검토
+      - 지연 판단: 계획 대비 진척률 편차 ≥ 20% 경보
+

@@ -1,0 +1,14 @@
+bundle:
+  name: 전체 팀
+  icon: 👥
+  description: 모든 핵심 시스템 에이전트를 포함합니다.
+agents:
+  - bmad-orchestrator
+  - '*'
+workflows:
+  - brownfield-fullstack.yaml
+  - brownfield-service.yaml
+  - brownfield-ui.yaml
+  - greenfield-fullstack.yaml
+  - greenfield-service.yaml
+  - greenfield-ui.yaml

@@ -1,0 +1,206 @@
+template:
+  id: frontend-architecture-template-v2
+  name: 프런트엔드 아키텍처 문서
+  version: 2.0
+  output:
+    format: markdown
+    filename: docs/ui-architecture.md
+    title: "{{project_name}} 프런트엔드 아키텍처 문서"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: template-framework-selection
+    title: 템플릿 및 프레임워크 선택
+    instruction: |
+      PRD, UX-UI 사양 및 주요 아키텍처 문서를 포함한 제공된 문서를 검토합니다. AI 프런트엔드 도구와 개발자 에이전트에 필요한 기술 구현 세부사항 추출에 집중합니다. 이러한 문서를 찾을 수 없거나 제공되지 않은 경우 사용자에게 요청하세요.
+      
+      프런트엔드 아키텍처 설계를 진행하기 전에, 프로젝트가 프런트엔드 스타터 템플릿이나 기존 코드베이스를 사용하는지 확인하세요:
+      
+      1. PRD, 주요 아키텍처 문서 및 브레인스토밍 브리프에서 다음 언급 사항을 검토:
+         - 프런트엔드 스타터 템플릿 (예: Create React App, Next.js, Vite, Vue CLI, Angular CLI 등)
+         - UI 키트 또는 컴포넌트 라이브러리 스타터
+         - 기반으로 사용되는 기존 프런트엔드 프로젝트
+         - 관리자 대시보드 템플릿 또는 기타 특수 스타터
+         - 디자인 시스템 구현
+      
+      2. 프런트엔드 스타터 템플릿이나 기존 프로젝트가 언급된 경우:
+         - 다음 방법 중 하나로 사용자에게 접근 권한을 요청:
+           - 스타터 템플릿 문서 링크
+           - 프로젝트 파일 업로드/첨부 (작은 프로젝트의 경우)
+           - 프로젝트 리포지토리 링크 공유
+         - 스타터/기존 프로젝트를 분석하여 이해:
+           - 사전 설치된 종속성 및 버전
+           - 폴더 구조 및 파일 구성
+           - 내장 컴포넌트 및 유틸리티
+           - 스타일링 접근 방식 (CSS 모듈, styled-components, Tailwind 등)
+           - 상태 관리 설정 (있는 경우)
+           - 라우팅 구성
+           - 테스트 설정 및 패턴
+           - 빌드 및 개발 스크립트
+         - 이 분석을 사용하여 프런트엔드 아키텍처가 스타터의 패턴과 일치하도록 보장
+      
+      3. 프런트엔드 스타터가 언급되지 않았지만 새로운 UI인 경우, UI 언어와 프레임워크가 무엇인지 확인:
+         - 프레임워크 선택에 따라 적절한 스타터 제안:
+           - React: Create React App, Next.js, Vite + React
+           - Vue: Vue CLI, Nuxt.js, Vite + Vue
+           - Angular: Angular CLI
+           - 또는 해당하는 경우 인기 있는 UI 템플릿 제안
+         - 프런트엔드 개발에 특화된 이점 설명
+      
+      4. 사용자가 스타터 템플릿을 사용하지 않을 것을 확인한 경우:
+         - 모든 도구, 번들링 및 구성이 수동 설정이 필요함을 명시
+         - 처음부터 프런트엔드 아키텍처 진행
+      
+      진행하기 전에 스타터 템플릿 결정 사항과 부과하는 제약사항을 문서화하세요.
+    sections:
+      - id: changelog
+        title: 변경 로그
+        type: table
+        columns: [날짜, 버전, 설명, 작성자]
+        instruction: 문서 버전 및 변경사항 추적
+
+  - id: frontend-tech-stack
+    title: 프런트엔드 기술 스택
+    instruction: 주요 아키텍처의 기술 스택 테이블에서 추출합니다. 이 섹션은 주요 아키텍처 문서와 동기화된 상태를 유지해야 합니다.
+    elicit: true
+    sections:
+      - id: tech-stack-table
+        title: 기술 스택 테이블
+        type: table
+        columns: [카테고리, 기술, 버전, 목적, 근거]
+        instruction: 선택한 프레임워크와 프로젝트 요구사항에 따라 적절한 기술 선택을 채웁니다.
+        rows:
+          - ["프레임워크", "{{framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["UI 라이브러리", "{{ui_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["상태 관리", "{{state_management}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["라우팅", "{{routing_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["빌드 도구", "{{build_tool}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["스타일링", "{{styling_solution}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["테스트", "{{test_framework}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["컴포넌트 라이브러리", "{{component_lib}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["폼 처리", "{{form_library}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["애니메이션", "{{animation_lib}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+          - ["개발 도구", "{{dev_tools}}", "{{version}}", "{{purpose}}", "{{why_chosen}}"]
+
+  - id: project-structure
+    title: 프로젝트 구조
+    instruction: 선택한 프레임워크를 기반으로 AI 도구를 위한 정확한 디렉토리 구조를 정의합니다. 각 파일 유형이 어디에 위치하는지 구체적으로 명시합니다. 프레임워크의 모범 사례와 규칙을 따르는 구조를 생성합니다.
+    elicit: true
+    type: code
+    language: plaintext
+
+  - id: component-standards
+    title: 컴포넌트 표준
+    instruction: 선택한 프레임워크를 기반으로 컴포넌트 생성을 위한 정확한 패턴을 정의합니다.
+    elicit: true
+    sections:
+      - id: component-template
+        title: 컴포넌트 템플릿
+        instruction: 프레임워크의 모범 사례를 따르는 최소한이지만 완전한 컴포넌트 템플릿을 생성합니다. TypeScript 타입, 적절한 import 및 기본 구조를 포함합니다.
+        type: code
+        language: typescript
+      - id: naming-conventions
+        title: 명명 규칙
+        instruction: 컴포넌트, 파일, 서비스, 상태 관리 및 기타 아키텍처 요소에 대해 선택한 프레임워크에 특화된 명명 규칙을 제공합니다.
+
+  - id: state-management
+    title: 상태 관리
+    instruction: 선택한 프레임워크를 기반으로 상태 관리 패턴을 정의합니다.
+    elicit: true
+    sections:
+      - id: store-structure
+        title: 스토어 구조
+        instruction: 선택한 프레임워크와 선택한 상태 관리 솔루션에 적합한 상태 관리 디렉토리 구조를 생성합니다.
+        type: code
+        language: plaintext
+      - id: state-template
+        title: 상태 관리 템플릿
+        instruction: 프레임워크의 권장 패턴을 따르는 기본 상태 관리 템플릿/예제를 제공합니다. TypeScript 타입과 설정, 업데이트, 상태 지우기와 같은 일반적인 작업을 포함합니다.
+        type: code
+        language: typescript
+
+  - id: api-integration
+    title: API 통합
+    instruction: 선택한 프레임워크를 기반으로 API 서비스 패턴을 정의합니다.
+    elicit: true
+    sections:
+      - id: service-template
+        title: 서비스 템플릿
+        instruction: 프레임워크의 규칙을 따르는 API 서비스 템플릿을 제공합니다. 적절한 TypeScript 타입, 오류 처리 및 비동기 패턴을 포함합니다.
+        type: code
+        language: typescript
+      - id: api-client-config
+        title: API 클라이언트 구성
+        instruction: 인증 인터셉터/미들웨어 및 오류 처리를 포함하여 선택한 프레임워크에 대한 HTTP 클라이언트를 구성하는 방법을 보여줍니다.
+        type: code
+        language: typescript
+
+  - id: routing
+    title: 라우팅
+    instruction: 선택한 프레임워크를 기반으로 라우팅 구조와 패턴을 정의합니다.
+    elicit: true
+    sections:
+      - id: route-configuration
+        title: 라우트 구성
+        instruction: 선택한 프레임워크에 적합한 라우팅 구성을 제공합니다. 보호된 라우트 패턴, 해당하는 경우 지연 로딩 및 인증 가드/미들웨어를 포함합니다.
+        type: code
+        language: typescript
+
+  - id: styling-guidelines
+    title: 스타일링 가이드라인
+    instruction: 선택한 프레임워크를 기반으로 스타일링 접근 방식을 정의합니다.
+    elicit: true
+    sections:
+      - id: styling-approach
+        title: 스타일링 접근 방식
+        instruction: 선택한 프레임워크에 적합한 스타일링 방법론(CSS 모듈, Styled Components, Tailwind 등)을 설명하고 기본 패턴을 제공합니다.
+      - id: global-theme
+        title: 글로벌 테마 변수
+        instruction: 모든 프레임워크에서 작동하는 CSS 사용자 정의 속성(CSS 변수) 테마 시스템을 제공합니다. 색상, 간격, 타이포그래피, 그림자 및 다크 모드 지원을 포함합니다.
+        type: code
+        language: css
+
+  - id: testing-requirements
+    title: 테스트 요구사항
+    instruction: 선택한 프레임워크를 기반으로 최소한의 테스트 요구사항을 정의합니다.
+    elicit: true
+    sections:
+      - id: component-test-template
+        title: 컴포넌트 테스트 템플릿
+        instruction: 프레임워크의 권장 테스트 라이브러리를 사용하는 기본 컴포넌트 테스트 템플릿을 제공합니다. 렌더링 테스트, 사용자 상호작용 테스트 및 모킹의 예를 포함합니다.
+        type: code
+        language: typescript
+      - id: testing-best-practices
+        title: 테스트 모범 사례
+        type: numbered-list
+        items:
+          - "**단위 테스트**: 개별 컴포넌트를 격리하여 테스트"
+          - "**통합 테스트**: 컴포넌트 상호작용 테스트"
+          - "**E2E 테스트**: 중요한 사용자 플로우 테스트 (Cypress/Playwright 사용)"
+          - "**커버리지 목표**: 80% 코드 커버리지 목표"
+          - "**테스트 구조**: Arrange-Act-Assert 패턴"
+          - "**외부 종속성 모킹**: API 호출, 라우팅, 상태 관리"
+
+  - id: environment-configuration
+    title: 환경 구성
+    instruction: 선택한 프레임워크를 기반으로 필요한 환경 변수를 나열합니다. 프레임워크에 적합한 형식과 명명 규칙을 보여줍니다.
+    elicit: true
+
+  - id: frontend-developer-standards
+    title: 프런트엔드 개발자 표준
+    sections:
+      - id: critical-coding-rules
+        title: 중요한 코딩 규칙
+        instruction: 일반적인 AI 실수를 방지하는 필수 규칙을 나열합니다. 보편적인 규칙과 프레임워크별 규칙을 모두 포함합니다.
+        elicit: true
+      - id: quick-reference
+        title: 빠른 참조
+        instruction: |
+          다음을 포함하는 프레임워크별 치트 시트 생성:
+          - 일반 명령 (개발 서버, 빌드, 테스트)
+          - 주요 import 패턴
+          - 컴포넌트 구조
+          - 상태 관리 패턴
