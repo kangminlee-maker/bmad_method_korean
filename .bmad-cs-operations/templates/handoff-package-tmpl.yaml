@@ -38,4 +38,18 @@ files:
       - PII 마스킹 필수, 권한 점검 후 링크 공유
       - 색인에 최종 체크리스트 포함(완료/권한/에스컬레이션 경로)
       - 전환 확인서는 content_hash 저장, 실패 시 롤백 플랜 가동
+  - name: handoff-index.md
+    template: |
+      # Handoff Index (Case {{case_id}})
+      - Package Path: cases/{{case_id}}-handoff-package/
+      - handoff_decision_signed_by: {{reviewer}}
+      - handoff_decision_signed_at: {{signed_at}}
+      - Contents:
+        - customer-context.md
+        - case-history.md
+        - requirements-summary.md
+        - evidence-links.md
+        - contact-information.md
+        - privacy-notes.md
+        - handoff-readme.md
 
